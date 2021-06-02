@@ -6,6 +6,7 @@ import os
 import pandas as pd
 import numpy as np
 import cv2 as cv
+from preprocess.analysis import Analysis
 
 # get current working directory
 
@@ -16,20 +17,21 @@ if os.path.exists(csv_path):
     # create a dataframe form the csv file
     dataframe = pd.read_csv(csv_path)
 
-    image_name = f'{dataframe.iloc[100, 0]}.png'
-    regions = dataframe.iloc[100, 1]
+    image_name = f'{dataframe.iloc[3497, 0]}.png'
+    regions = dataframe.iloc[3497, 1]
     regions_array = regions.split(';')
 
     regions_array = [r.split(" ") for r in regions_array]
 
     regions_np = np.array(regions_array)
 
-    # print(int(regions_array[0][0]))
-    print(regions_np[0])
+    #image = cv.imread(os.path.join(dataset_path, image_name))
+    image_path = os.path.join(dataset_path, image_name)
 
-    image = cv.imread(os.path.join(dataset_path, image_name))
+    Analysis(image_path)
 
-    for r in regions_np:
+    # Draw rectangles
+    """ for r in regions_np:
         x = int(r[0])
         y = int(r[1])
         w = int(r[2])
@@ -39,7 +41,7 @@ if os.path.exists(csv_path):
 
     cv.imshow('image', image)
     cv.waitKey(0)
-    cv.destroyAllWindows()
+    cv.destroyAllWindows() """
 
 
 else:
