@@ -17,8 +17,12 @@ if os.path.exists(csv_path):
     # create a dataframe form the csv file
     dataframe = pd.read_csv(csv_path)
 
-    image_name = f'{dataframe.iloc[3497, 0]}.png'
-    regions = dataframe.iloc[3497, 1]
+    image_name = f'{dataframe.iloc[44, 0]}.png'
+    image_path = os.path.join(dataset_path, image_name)
+    Analysis(image_path)
+
+    """ 
+    regions = dataframe.iloc[2374, 1]
     regions_array = regions.split(';')
 
     regions_array = [r.split(" ") for r in regions_array]
@@ -26,12 +30,12 @@ if os.path.exists(csv_path):
     regions_np = np.array(regions_array)
 
     #image = cv.imread(os.path.join(dataset_path, image_name))
-    image_path = os.path.join(dataset_path, image_name)
+    
 
-    Analysis(image_path)
+    
 
     # Draw rectangles
-    """ for r in regions_np:
+    for r in regions_np:
         x = int(r[0])
         y = int(r[1])
         w = int(r[2])
