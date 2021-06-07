@@ -1,4 +1,4 @@
-""" 
+"""
     ####Image Segmentation class###
     @author: Fraol Gelana
     @Institute:Artificial Intelligence Center
@@ -40,9 +40,9 @@ class ImageSegment:
 
         # Create a binary mask from the SV Channel
 
-        mask = cv.inRange(SV_channel, (0, 0, 80), (0, 190, 255))
+        mask = cv.inRange(SV_channel, (0, 0, 100), (0, 90, 255))
         # Invert mask, White areas represent green components and black the background
-        #mask = cv.bitwise_not(mask)
+        # mask = cv.bitwise_not(mask)
 
         # perform bitwise_and between mask and hsv image
 
@@ -58,12 +58,12 @@ class ImageSegment:
 
         self.color_segment(hsv_image_equ, rgb_image_equ, leaf_image)
 
-    def color_segment(self, hsv_space, rgb_space, leaf_image, lowerB=(0, 0, 0), upperB=(255, 155, 255)):
+    def color_segment(self, hsv_space, rgb_space, leaf_image, lowerB=(0, 0, 0), upperB=(255, 255, 255)):
         # extracted in the HSV color space
 
         # create binary mask using the bounds
         mask = cv.inRange(hsv_space, lowerB, upperB)
-        #mask = cv.bitwise_not(mask)
+        # mask = cv.bitwise_not(mask)
 
         # bitwise_and mask and rgb image
         output_hsv = cv.bitwise_and(hsv_space, hsv_space, mask=mask)
@@ -89,9 +89,10 @@ class ImageSegment:
         # bitwise_and mask and rgb image
         o_rgb = cv.bitwise_and(output_rgb, output_rgb, mask=mask)
         o_hsv = cv.bitwise_and(hsv_space, hsv_space, mask=mask)
-        self.__setExtracted(o_hsv)
 
-        #self.thresh_mask(o_rgb, leaf_image, leafArea)
+        self.__setExtracted(o_rgb)
+
+        #self.thresh_mask(o_rgb, leaf_image)
 
     def findLowerBound(self, intensityArray):
 
@@ -135,7 +136,7 @@ class ImageSegment:
             lowerBound = self.findLowerBound(nonZeroIntentsity)
             return lowerBound
 
-    def thresh_mask(self, out, leaf_image, leafArea):
+    def thresh_mask(self, out, leaf_image):
         mask = cv.cvtColor(out, cv.COLOR_RGB2GRAY)
         # Calculate the otsu threshold
         ret, thresh = cv.threshold(
@@ -146,7 +147,9 @@ class ImageSegment:
 
         thresh = cv.morphologyEx(thresh, cv.MORPH_CLOSE, kernel)
 
-        self.find_contours(thresh, out, leaf_image, leafArea)
+        self.__setExtracted(thresh)
+
+        #self.find_contours(thresh, out, leaf_image, leafArea)
 
     def find_contours(self, mask, img, leaf_image, leafArea):
         # Find the contours of the segmented disease spots

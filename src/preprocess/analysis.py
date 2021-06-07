@@ -23,6 +23,13 @@ class Analysis:
 
         fig, axs = plt.subplots(1, 2)
         axs[0].imshow(image_one)
-        axs[1].imshow(bg[:, :, 2], cmap="gray")
+        axs[1].imshow(bg, cmap="gray")
 
+        plt.show()
+        #self.canny_edge(bg[:, :, 2])
+
+    def canny_edge(self, image):
+        gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+        #canny = cv.Canny(gray, 10, 100)
+        plt.imshow(gray, cmap="gray")
         plt.show()
