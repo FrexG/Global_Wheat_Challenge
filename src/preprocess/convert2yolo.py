@@ -15,4 +15,35 @@ class Convert2YoLo:
 
     def __init__(self):
         # If dataset exists
-        if os.path.exists(self.DATASET_PATH):
+        try:
+            labels_df = pd.read_csv(self.LABELS_PATH)
+
+            self.__process_labels(labels_df)
+
+        except FileNotFoundError:
+            print(f"The path '{self.LABELS_PATH}'is INVALID")
+
+    def __process_labels(self, dataframe):
+        # convert the dataframe into numpy array
+        dataframe_array = np.array(dataframe)
+
+        for i, image in enumerate(dataframe_array):
+            # get image name
+            image_name = image[0]
+            # extract roi
+            region_of_interests = image[1]
+            domain = image[2]
+            # Split by semicolon and space
+            split_roi = region_of_interests.split(';')
+            split_roi = [r.split(" ") for r in split_roi]
+            # cast string into integer
+            split_roi_int = [list(map(int, r)) for r in split_roi]
+
+            print(split_roi_int)
+
+            break
+
+
+if __name__ == "__main__":
+
+    converter = Convert2YoLo()

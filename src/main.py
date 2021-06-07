@@ -19,12 +19,14 @@ if os.path.exists(csv_path):
 
     image_name = f'{dataframe.iloc[1247, 0]}.png'
     image_path = os.path.join(dataset_path, image_name)
-    Analysis(image_path)
+    # Analysis(image_path)
 
     regions = dataframe.iloc[1247, 1]
     regions_array = regions.split(';')
 
     regions_array = [r.split(" ") for r in regions_array]
+
+    print(regions_array)
 
     regions_np = np.array(regions_array)
 
