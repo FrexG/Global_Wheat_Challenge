@@ -53,8 +53,8 @@ class Convert2YoLo:
         __ = []
 
         for box in region_of_interests:
-            x_center = (box[0] + box[2]) // 2
-            y_center = (box[1] + box[3]) // 2
+            x_center = (box[0] + box[2]) / 2
+            y_center = (box[1] + box[3]) / 2
 
             __.append([0, x_center, y_center, box[2], box[3]])
 
@@ -70,7 +70,7 @@ class Convert2YoLo:
             print(Exception)
         finally:
             np.savetxt(os.path.join(self.YOLO_TRAIN_PATH, f"{image_name}.txt"), labels, fmt=[
-                "%d", "%d", "%d", "%d", "%d"])
+                "%d", "%f", "%f", "%f", "%f"])
 
 
 if __name__ == "__main__":
