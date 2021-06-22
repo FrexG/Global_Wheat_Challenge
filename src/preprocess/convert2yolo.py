@@ -1,3 +1,7 @@
+# Conversion of the obtained dataset
+# to the format required by the YoLo
+# object detection model
+
 import os
 import pandas as pd
 import numpy as np
