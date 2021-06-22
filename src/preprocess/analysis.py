@@ -1,3 +1,9 @@
+"""
+Color analysis of the wheathead dataset
+Extraction of wheatheads from the rest of 
+the image using the HSV color space.
+"""
+
 import os
 import matplotlib.pyplot as plt
 import numpy as np

@@ -65,8 +65,7 @@ class Convert2YoLo:
         try:
             copy2(os.path.join(self.DATASET_PATH,
                                f"{image_name}.png"), self.YOLO_TRAIN_PATH)
-
-        except Exception:
+        except FileNotFoundError:
             print(Exception)
         finally:
             np.savetxt(os.path.join(self.YOLO_TRAIN_PATH, f"{image_name}.txt"), labels, fmt=[

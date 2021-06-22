@@ -1,7 +1,7 @@
 # main entry of the program
-# ----------------------------##
-# Accessing and manipulation of the ##
-# dataset csv file##
+# ----------------------------
+# Accessing and manipulation of the
+# dataset csv file
 import os
 import pandas as pd
 import numpy as np
@@ -17,11 +17,11 @@ if os.path.exists(csv_path):
     # create a dataframe form the csv file
     dataframe = pd.read_csv(csv_path)
 
-    image_name = f'{dataframe.iloc[1247, 0]}.png'
+    image_name = f'{dataframe.iloc[1037, 0]}.png'
     image_path = os.path.join(dataset_path, image_name)
     # Analysis(image_path)
 
-    regions = dataframe.iloc[1247, 1]
+    regions = dataframe.iloc[1037, 1]
     regions_array = regions.split(';')
 
     regions_array = [r.split(" ") for r in regions_array]
