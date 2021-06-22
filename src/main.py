@@ -1,7 +1,7 @@
 # main entry of the program
 # ----------------------------
-# Accessing and manipulation of the
-# dataset csv file
+# Visualization of the dataset
+
 import os
 import pandas as pd
 import numpy as np
